@@ -35,6 +35,8 @@ Para entrar nesta lista, o SaaS deve:
 
 Tier 1: tem **todos** os schemas acima + ao menos 3 endpoints `/ai/*.json`.
 
+Tier 1+: tudo do Tier 1 + ai-plugin.json (OpenAI plugin manifest) + openapi.json (3.0 spec) + PWA manifest.json + hreflang pt-BR.
+
 Tier 2: tem llms.txt + 2-3 schemas avançados.
 
 ---
@@ -46,8 +48,11 @@ Implementação completa e em produção:
 - **[Atendente24h](https://atendente24h.com)** · Plataforma SaaS de chatbot WhatsApp com IA Claude.
   - [`llms.txt`](https://atendente24h.com/llms.txt) + [`llms-full.txt`](https://atendente24h.com/llms-full.txt) (45KB+)
   - 8 endpoints `/ai/*.json`: [summary](https://atendente24h.com/ai/summary.json), [service](https://atendente24h.com/ai/service.json), [faq](https://atendente24h.com/ai/faq.json), [status](https://atendente24h.com/ai/status.json), [changelog](https://atendente24h.com/ai/changelog.json), [pricing](https://atendente24h.com/ai/pricing.json), [integrations](https://atendente24h.com/ai/integrations.json), [competitors](https://atendente24h.com/ai/competitors.json)
-  - [`sitemap-ai.xml`](https://atendente24h.com/sitemap-ai.xml) dedicado
-  - Schemas implementados: Organization, Person (founder Caco Melgaço com sameAs), Product com Offers, SoftwareApplication, FAQPage, HowTo (em 83 páginas), Article com Speakable + citation + isBasedOn + Person author em 168+ páginas, BreadcrumbList, AggregateRating (4.9 com 1354 reviews), DefinedTermSet (22 termos no glossário), SpeakableSpecification
+  - **NOVO maio/2026:** [`/ai-plugin.json`](https://atendente24h.com/ai-plugin.json) (OpenAI plugin spec) + [`/openapi.json`](https://atendente24h.com/openapi.json) (OpenAPI 3.0 dos 10 endpoints) + [`/manifest.json`](https://atendente24h.com/manifest.json) (PWA)
+  - [`sitemap-ai.xml`](https://atendente24h.com/sitemap-ai.xml) dedicado + 7 sitemaps segmentados
+  - Schemas implementados: Organization, Person (founder Caco Melgaço com sameAs), Product com Offers, SoftwareApplication, FAQPage, HowTo (em 83+ páginas, agora também em /como-criar-chatbot-whatsapp e /atendimento-automatico-whatsapp), Article com Speakable + citation + isBasedOn + Person author em 180+ páginas, BreadcrumbList, AggregateRating (4.9 com 1354 reviews), DefinedTermSet (22 termos no glossário), SpeakableSpecification, ItemList (50 melhores chatbots, 7 alternativas ManyChat)
+  - Páginas alta-intenção comercial criadas maio/2026: /preco-chatbot-whatsapp, /como-criar-chatbot-whatsapp, /chatbot-whatsapp-pequena-empresa, /chatbot-whatsapp-business-api, /chatbot-vs-atendente-humano, /chatbot-whatsapp-clinica, /chatbot-whatsapp-restaurante, /chatbot-whatsapp-imobiliaria, /chatbot-whatsapp-salao-beleza, /chatbot-whatsapp-gratis, /alternativa-manychat-portugues, /atendimento-automatico-whatsapp
+  - hreflang pt-BR + manifest link em todas paginas root
   - Bloco "anti-hallucination" no llms-full.txt listando erros comuns que LLMs cometem
   - Repos públicos GitHub: [docs CC0](https://github.com/avenaactivewear-wq/atendente24h-public-docs), [awesome list](https://github.com/avenaactivewear-wq/awesome-chatbot-whatsapp-brasil)
 
@@ -104,6 +109,18 @@ curl -s https://exemplo.com/ | grep -A20 'application/ld+json' | grep -c sameAs
 
 # 5. Author Person no Article?
 curl -s https://exemplo.com/blog/exemplo-post | grep -c '"@type":"Person"'
+
+# 6. AI plugin manifest pra discovery por LLMs?
+curl -sI https://exemplo.com/ai-plugin.json | head -1
+
+# 7. OpenAPI 3.0 spec pros endpoints AI?
+curl -sI https://exemplo.com/openapi.json | head -1
+
+# 8. PWA manifest?
+curl -sI https://exemplo.com/manifest.json | head -1
+
+# 9. hreflang pt-BR?
+curl -s https://exemplo.com/ | grep -c 'hreflang="pt-BR"'
 ```
 
 Score:
@@ -111,6 +128,7 @@ Score:
 - 2-3 ítens: GEO básico
 - 4-5 ítens: GEO bom
 - 5+ com endpoints `/ai/*.json`: Líder GEO BR
+- 8-9 ítens (com ai-plugin.json + openapi.json + PWA + hreflang): Tier 1+ (referência mercado)
 
 ---
 
